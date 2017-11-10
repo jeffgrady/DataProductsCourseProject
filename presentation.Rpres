@@ -1,0 +1,55 @@
+Developing Data Products Course Project
+========================================================
+author: Jeff Grady
+date: 11/10/2017
+autosize: true
+
+Developing Data Products Course Project
+========================================================
+
+I created a simple application to do **exploratory data analysis**
+on the **`mtcars`** dataset:
+
+<https://www.google.com>.
+
+The goal of the application:
+
+- Make it simple for anyone to look at this data in whatever way they want and try to come up with ideas for further examination or study.
+
+How To Use The Application
+========================================================
+
+- User selects an independent variable from a select box (ex: **weight**).
+- User selects an dependent variable from a select box (ex: **mpg**).
+- User selects a factor variable from a select box (ex: **transmission type**).
+
+
+How To Use The Application (cont'd)
+========================================================
+
+The resulting user input will produce a plot resembling the example on the next slide.
+
+- Color indicates a level within the factor variable selected, as well as the point shape.
+- For each factor level, a regression line is computed and displayed.
+- The user can turn the display of the regression lines on and off using the Regression lines checkbox.
+
+
+How To Use The Application (cont'd)
+========================================================
+An example plot of the default view (this is generated with embedded R code):
+
+```{r, echo=FALSE}
+data(mtcars)
+auto <- subset(mtcars, am == 0)
+manual <- subset(mtcars, am == 1)
+fitAuto <- lm(mpg ~ wt, auto)
+fitManual <- lm(mpg ~ wt, manual)
+plot(mpg ~ wt, data = mtcars, col = factor(mtcars$am), pch = mtcars$am + 16,
+     ylab = "Miles per gallon", xlab = "Weight")
+abline(fitAuto, col = "black")
+abline(fitManual, col = "red")
+legend("topright", col = c("black", "red"), legend = c("Automatic", "Manual"),
+       pch = c(16, 17), title = "Transmission")
+```
+
+
